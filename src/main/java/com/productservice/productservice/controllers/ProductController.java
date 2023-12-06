@@ -1,11 +1,19 @@
 package com.productservice.productservice.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.productservice.productservice.dtos.GenericProductDto;
+import com.productservice.productservice.exceptions.ProductNotFoundException;
 import com.productservice.productservice.services.ProductService;
 
 @RestController
@@ -15,34 +23,41 @@ public class ProductController {
     private ProductService productService;
 
     //Constructor Injection
-    ProductController(ProductService productService) {
+    ProductController(@Qualifier("fakeStoreProductService") ProductService productService) {
         this.productService = productService;
     } 
 
     // localhost:8080/products/1
     @GetMapping("/{id}")
-    public String getProductById(@PathVariable("id") Long id) {
-        // return "Scaler || Product with id: " + id + " is found.";
-
+    public GenericProductDto getProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
         return productService.getProductById(id);
     }
     
     @GetMapping
-    public void getAllProducts() {
-    
+    public List<GenericProductDto> getAllProducts() {
+        return productService.getAllProducts();
     }
     
     @DeleteMapping("/{id}")
-    public void deleteProductById() {
-    
+    public GenericProductDto deleteProductById(@PathVariable("id") Long id) {
+        return productService.deleteProductById(id);
     }
     
-    public void createProduct() {
-    
+    @PostMapping
+    public GenericProductDto createProduct(@RequestBody GenericProductDto genericProductDto) {
+        return productService.createProduct(genericProductDto);
     }
     
-    public void updateProductById() {
-    
+    @PatchMapping("/{id}")
+    public GenericProductDto updateProductById(@PathVariable("id") Long id, @RequestBody GenericProductDto genericProductDto) {
+        return productService.updateProductById(id, genericProductDto);
     }
 
+    // @ExceptionHandler(ProductNotFoundException.class)
+    // private ExceptionDto handleProductNotFoundException(ProductNotFoundException e) {
+    //     ExceptionDto exceptionDto = new ExceptionDto();
+    //     exceptionDto.setMessage(e.getMessage());
+    //     exceptionDto.setHttpStatus(HttpStatus.NOT_FOUND);
+    //     return exceptionDto;
+    // }
 }

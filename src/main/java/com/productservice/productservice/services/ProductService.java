@@ -1,14 +1,19 @@
 package com.productservice.productservice.services;
 
+import java.util.List;
+
+import com.productservice.productservice.dtos.GenericProductDto;
+import com.productservice.productservice.exceptions.ProductNotFoundException;
+
 public interface ProductService {
     
-    String getProductById(Long id);
+    GenericProductDto getProductById(Long id) throws ProductNotFoundException;
 
-    void getAllProducts();
+    List<GenericProductDto> getAllProducts();
 
-    void deleteProductById();
+    GenericProductDto deleteProductById(Long id);
 
-    void createProduct();
+    GenericProductDto createProduct(GenericProductDto genericProductDto);
 
-    void updateProductById();
+    GenericProductDto updateProductById(Long id, GenericProductDto genericProductDto);
 }
