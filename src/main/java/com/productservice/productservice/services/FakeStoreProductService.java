@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 import com.productservice.productservice.dtos.FakeStoreProductDto;
 import com.productservice.productservice.dtos.GenericProductDto;
 import com.productservice.productservice.exceptions.ProductNotFoundException;
-import com.productservice.productservice.thirdPartyClients.fakestoreclient.FakeStoreClientAdapter;
+import com.productservice.productservice.thirdPartyClients.fakestoreclient.FakeStoreClient;
 
 @Primary
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService {
 
-    private FakeStoreClientAdapter fakeStoreAdapter;
+    private FakeStoreClient fakeStoreClient;
 
-    FakeStoreProductService(FakeStoreClientAdapter fakeStoreAdapter) {
-        this.fakeStoreAdapter = fakeStoreAdapter;
+    FakeStoreProductService(FakeStoreClient fakeStoreClient) {
+        this.fakeStoreClient = fakeStoreClient;
     }
 
     private static GenericProductDto convertToGenericProductDto(FakeStoreProductDto fakeStoreProductDto) {
@@ -34,12 +34,12 @@ public class FakeStoreProductService implements ProductService {
 
     @Override
     public GenericProductDto getProductById(Long id) throws ProductNotFoundException {
-        return convertToGenericProductDto(fakeStoreAdapter.getProductById(id));
+        return convertToGenericProductDto(fakeStoreClient.getProductById(id));
     }
 
     @Override
     public List<GenericProductDto> getAllProducts() {
-        List<FakeStoreProductDto> fakeStoreProductDtos = fakeStoreAdapter.getAllProducts();
+        List<FakeStoreProductDto> fakeStoreProductDtos = fakeStoreClient.getAllProducts();
         List<GenericProductDto> genericProductDtos = new ArrayList<>();
         for (FakeStoreProductDto fakeStoreProductDto : fakeStoreProductDtos) {
             genericProductDtos.add(convertToGenericProductDto(fakeStoreProductDto));
@@ -49,17 +49,17 @@ public class FakeStoreProductService implements ProductService {
 
     @Override
     public GenericProductDto deleteProductById(Long id) throws ProductNotFoundException {
-       return convertToGenericProductDto(fakeStoreAdapter.deleteProductById(id));
+       return convertToGenericProductDto(fakeStoreClient.deleteProductById(id));
     }
 
     @Override
     public GenericProductDto createProduct(GenericProductDto genericProductDto) {
-        return convertToGenericProductDto(fakeStoreAdapter.createProduct(genericProductDto));
+        return convertToGenericProductDto(fakeStoreClient.createProduct(genericProductDto));
     }
 
     @Override
     public GenericProductDto updateProductById(Long id, GenericProductDto genericProductDto) {
-        return convertToGenericProductDto(fakeStoreAdapter.updateProductById(id, genericProductDto));
+        return convertToGenericProductDto(fakeStoreClient.updateProductById(id, genericProductDto));
     }
     
 }
