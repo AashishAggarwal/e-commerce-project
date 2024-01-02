@@ -12,7 +12,7 @@ import com.productservice.productservice.exceptions.ProductNotFoundException;
 import com.productservice.productservice.thirdPartyClients.fakestoreclient.FakeStoreClient;
 
 @Primary
-@Service("fakeStoreProductService")
+@Service
 public class FakeStoreProductService implements ProductService {
 
     private FakeStoreClient fakeStoreClient;
