@@ -239,17 +239,41 @@ public class ProductserviceApplication implements CommandLineRunner{
 //		Price price = optionalPrice.get();
 
 
-		Optional<Category> optionalCategory = categoryRepository.findById(UUID.fromString("0dfbcdd9-c9a1-49a2-aa91-9eed1ab9bb03"));
-		if (optionalCategory.isEmpty()) {
-			throw new Exception("Category not found");
-		}
-		Category category = optionalCategory.get();
+		// Optional<Category> optionalCategory = categoryRepository.findById(UUID.fromString("0dfbcdd9-c9a1-49a2-aa91-9eed1ab9bb03"));
+		// if (optionalCategory.isEmpty()) {
+		// 	throw new Exception("Category not found");
+		// }
+		// Category category = optionalCategory.get();
 
 //		List<Product> products = category.getProducts();
 //
 //		for (Product p : products) {
 //			System.out.println(p.getTitle());
 //		}
+
+//	List<Product> products = productRepository.findAll();
+
+//		List<Product> products = productRepository.findAllByTitleAndDescription("Iphone 13", "Best iphone");
+
+		// List<Product> products = productRepository.findByPrice_ValueGreaterThanEqual(50000);
+
+
+//		List<Product> products = productRepository.findByPrice_ValueLessThanEqual(50000);
+
+
+
+//		Category category = new Category();
+//		category.setName("Samsung");
+//		Category category1 = categoryRepository.save(category);
+//
+//		Price price = new Price();
+//		price.setCurrency("INR");
+//		price.setValue(49000);
+//
+//		Product product = new Product("Samsung Galaxy S21", "Best Samsung phone", "ImageURL", category1, price);
+//		productRepository.save(product);
+
+		// List<Product> products = productRepository.findByPrice_ValueBetween(20000, 50000);
 
 	}
 
