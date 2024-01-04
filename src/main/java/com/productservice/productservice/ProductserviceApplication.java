@@ -8,6 +8,7 @@ import com.productservice.productservice.repositories.CategoryRepository;
 import com.productservice.productservice.repositories.OrderRepository;
 import com.productservice.productservice.repositories.PriceRepository;
 import com.productservice.productservice.repositories.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 // import java.util.List;
@@ -43,17 +44,29 @@ public class ProductserviceApplication implements CommandLineRunner{
 	private final CategoryRepository categoryRepository;
 	private final ProductRepository productRepository;
 	private final PriceRepository priceRepository;
-	private final OrderRepository orderRepository;
 
 	public ProductserviceApplication(CategoryRepository categoryRepository,
 									 ProductRepository productRepository,
-									 PriceRepository priceRepository,
-									 OrderRepository orderRepository) {
+									 PriceRepository priceRepository) {
 		this.categoryRepository = categoryRepository;
 		this.productRepository = productRepository;
 		this.priceRepository = priceRepository;
-		this.orderRepository = orderRepository;
 	}
+
+//	private final CategoryRepository categoryRepository;
+//	private final ProductRepository productRepository;
+//	private final PriceRepository priceRepository;
+//	private final OrderRepository orderRepository;
+//
+//	public ProductserviceApplication(CategoryRepository categoryRepository,
+//									 ProductRepository productRepository,
+//									 PriceRepository priceRepository,
+//									 OrderRepository orderRepository) {
+//		this.categoryRepository = categoryRepository;
+//		this.productRepository = productRepository;
+//		this.priceRepository = priceRepository;
+//		this.orderRepository = orderRepository;
+//	}
 	// private MentorRepository mentorRepository;
 	// private StudentRepository studentRepository;
 	// private UserRepository userRepository;
@@ -82,6 +95,7 @@ public class ProductserviceApplication implements CommandLineRunner{
 	}
 
 	@Override
+//	@Transactional
 	public void run(String... args) throws Exception {
 
 		// tpc_mentor
@@ -157,9 +171,9 @@ public class ProductserviceApplication implements CommandLineRunner{
 //		Price price = new Price();
 //		price.setCurrency("INR");
 //		price.setValue(100000);
-//
+
 //		Price savedPrice = priceRepository.save(price);
-//
+
 //		Category category = new Category();
 //		category.setName("Apple Devices");
 //		Category savedCategory = categoryRepository.save(category);
@@ -168,13 +182,74 @@ public class ProductserviceApplication implements CommandLineRunner{
 //		product.setTitle("iPhone 13 Pro");
 //		product.setDescription("iPhone 13 Pro with 128GB storage");
 //		product.setCategory(savedCategory);
-//		product.setPrice(savedPrice);
+//		product.setPrice(price);
 //
 //		Product savedProduct = productRepository.save(product);
 
+//		 productRepository.deleteById(UUID.fromString("14fbd09a-8337-4654-a5d9-7b652e11421c"));
 
-		priceRepository.deleteById(UUID.fromString("f236986d-86a9-4e3d-aa29-c25873d1cc2b"));
+//		Category category = new Category();
+//		category.setName("Apple Devices");
+//		Category savedCategory = categoryRepository.save(category);
+//
+//		Price price = new Price();
+//		price.setValue(100000);
+//		price.setCurrency("INR");
 
+
+//		Product product = new Product();
+//		product.setTitle("iPhone 13 Pro");
+//		product.setDescription("Best iphone ever");
+//		product.setCategory(category);
+//		product.setPrice(price);
+//		product.setImage("ImageURL");
+//		Product savedProduct = productRepository.save(product);
+//
+//
+//		Price price1 = new Price();
+//		price1.setValue(100000);
+//		price1.setCurrency("INR");
+//
+//
+//		Product product1 = new Product();
+//		product1.setTitle("iPhone 13");
+//		product1.setDescription("Best iphone");
+//		product1.setCategory(category);
+//		product1.setPrice(price1);
+//		product1.setImage("ImageURL");
+//		Product savedProduct1 = productRepository.save(product1);
+//
+//
+//		Price price2 = new Price();
+//		price2.setValue(100000);
+//		price2.setCurrency("INR");
+//
+//		Product product2 = new Product();
+//		product2.setTitle("iPhone 13 Pro Max");
+//		product2.setDescription("Best iphone ever");
+//		product2.setCategory(category);
+//		product2.setPrice(price2);
+//		product2.setImage("ImageURL");
+//		Product savedProduct2 = productRepository.save(product2);
+
+//		Optional<Price> optionalPrice = priceRepository.findById(UUID.fromString("27aeebaa-e071-44b6-8a17-6252e0ac5958"));
+//		if (optionalPrice.isEmpty()) {
+//			throw new Exception("Price not found");
+//		}
+//		Price price = optionalPrice.get();
+
+
+		Optional<Category> optionalCategory = categoryRepository.findById(UUID.fromString("0dfbcdd9-c9a1-49a2-aa91-9eed1ab9bb03"));
+		if (optionalCategory.isEmpty()) {
+			throw new Exception("Category not found");
+		}
+		Category category = optionalCategory.get();
+
+//		List<Product> products = category.getProducts();
+//
+//		for (Product p : products) {
+//			System.out.println(p.getTitle());
+//		}
 
 	}
 

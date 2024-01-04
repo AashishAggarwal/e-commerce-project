@@ -1,15 +1,20 @@
 package com.productservice.productservice.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product extends BaseModel {
     private String title;
     private String description;
@@ -20,7 +25,7 @@ public class Product extends BaseModel {
     @JoinColumn(nullable = false)
     private Category category;
 
-    @OneToOne(optional = false)
-    @JoinColumn(nullable = false)
+    @OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    // @JoinColumn(nullable = false)
     private Price price;
 }
